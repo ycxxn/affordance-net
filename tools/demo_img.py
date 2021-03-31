@@ -167,6 +167,12 @@ def visualize_mask(im, rois_final, rois_class_score, rois_class_ind, masks, ori_
     # get mask
     masks = masks[inds, :, :, :]
     
+    for i in range(masks.shape[0]):
+        mask = masks[i, :, :, :]
+        mask = np.argmax(mask, axis=0)
+        mask = label_colours.take(mask, axis=0).astype('uint8')
+        cv2.imshow("mask_ori"+str(i), mask)
+
     im_width = im.shape[1]
     im_height = im.shape[0]
     
